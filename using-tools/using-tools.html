@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pirate Jokes</title>
+</head>
+<body>
+  <h1>Pirate Jokes</h1>
+  <ul id="jokes"></ul>
+
+  <script>
+   
+    fetch("https://icanhazdadjoke.com/search?term=pirate", {
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        const jokes = data.results;
+        const jokesList = document.getElementById("jokes");
+
+        jokes.forEach(joke => {
+          const li = document.createElement("li");
+          li.textContent = joke.joke;
+          jokesList.appendChild(li);
+        });
+      })
+      .catch(error => console.log(error));
+  </script>
+</body>
+</html>
